@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profit Margin Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        h5 {
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+            margin: 10px 0;
+        }
+        label, input, button, p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        span {
+            font-weight: bold;
+        }
+        #result-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #priceToCustomer, #calculatedProfit {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function calculateProfit() {
+            var costPrice = parseFloat(document.getElementById('costPrice').value);
+            var marginPercentage = parseFloat(document.getElementById('marginPercentage').value);
+            var priceToCustomer = document.getElementById('priceToCustomer');
+            var calculatedProfit = document.getElementById('calculatedProfit');
+
+            if (isNaN(costPrice) || isNaN(marginPercentage)) {
+                priceToCustomer.innerText = "Please input cost price and desired profit margin to compute.";
+                calculatedProfit.innerText = "";
+                return;
+            }
+
+            var profit = costPrice / (1 - marginPercentage / 100);
+            var formattedProfit = profit.toFixed(2);
+
+            priceToCustomer.innerText = "Price to Customer: ";
+            calculatedProfit.innerText = formattedProfit;
+        }
+    </script>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Profit Margin Calculator</h1>
+        <h5>Formula(Additional percentage for buffer or margin) <br> Cost price / (1 - desired profit margin) <br> X / (1 - Y)</h5>
+        <form>
+            <label for="costPrice">Cost Price:</label>
+            <input type="number" id="costPrice" step="0.01" required>
+            <label for="marginPercentage">Desired Profit Margin (%):</label>
+            <input type="number" id="marginPercentage" step="0.01" required>
+            <button type="button" onclick="calculateProfit()">Calculate</button>
+        </form>
+        <div id="result-container">
+            <p id="priceToCustomer"></p>
+            <p id="calculatedProfit"></p>
+        </div>
+    </div>
+</body>
+</html>

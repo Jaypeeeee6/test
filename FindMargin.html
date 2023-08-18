@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gross Profit and Margin Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        h5 {
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+            margin: 10px 0;
+        }
+        label, input, button, p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        span {
+            font-weight: bold;
+        }
+        #result-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #grossProfitResult, #marginResult {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Gross Profit and Margin Calculator</h1>
+        <h5>Formula:<br>Revenue - Cost = Gross Profit<br>(Gross Profit / Revenue) * 100 = Margin</h5>
+        <label for="revenue">Revenue:</label>
+        <input type="number" id="revenue" step="0.01">
+        <label for="cost">Cost:</label>
+        <input type="number" id="cost" step="0.01">
+        <button onclick="calculate()">Calculate</button>
+        <div id="result-container">
+            <p>Gross Profit: <span id="grossProfitResult"></span></p>
+            <p>Margin: <span id="marginResult"></span>%</p>
+        </div>
+    </div>
+    
+    <script>
+        function calculate() {
+            const revenue = parseFloat(document.getElementById("revenue").value);
+            const cost = parseFloat(document.getElementById("cost").value);
+            const grossProfitResult = document.getElementById("grossProfitResult");
+            const marginResult = document.getElementById("marginResult");
+
+            if (isNaN(revenue) || isNaN(cost)) {
+                grossProfitResult.innerText = "Please input revenue and cost to compute.";
+                marginResult.innerText = "Please input revenue and cost to compute.";
+                return;
+            }
+
+            const grossProfit = revenue - cost;
+            const margin = (grossProfit / revenue) * 100;
+
+            grossProfitResult.textContent = grossProfit.toFixed(2);
+            marginResult.textContent = margin.toFixed(2);
+        }
+    </script>
+</body>
+</html>
